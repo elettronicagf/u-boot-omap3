@@ -3312,6 +3312,7 @@ extern unsigned int __machine_arch_type;
 #define MACH_TYPE_T5388P               3336
 #define MACH_TYPE_DINGO                3337
 #define MACH_TYPE_GOFLEXHOME           3338
+#define MACH_TYPE_OMAP3_EGF	       3637
 
 #ifdef CONFIG_ARCH_EBSA110
 # ifdef machine_arch_type
@@ -21599,6 +21600,18 @@ extern unsigned int __machine_arch_type;
 # define machine_is_omap3_beagle()	(machine_arch_type == MACH_TYPE_OMAP3_BEAGLE)
 #else
 # define machine_is_omap3_beagle()	(0)
+#endif
+
+#ifdef CONFIG_MACH_OMAP3_EGF
+# ifdef machine_arch_type
+#  undef machine_arch_type
+#  define machine_arch_type	__machine_arch_type
+# else
+#  define machine_arch_type	MACH_TYPE_OMAP3_EGF
+# endif
+# define machine_is_omap3_egf()	(machine_arch_type == MACH_TYPE_OMAP3_EGF)
+#else
+# define machine_is_omap3_egf()	(0)
 #endif
 
 #ifdef CONFIG_MACH_CSR_BDB2

@@ -156,10 +156,8 @@ sinclude $(obj)include/autoconf.mk
 include $(obj)include/config.mk
 export	ARCH CPU BOARD VENDOR SOC
 
-# set default to nothing for native builds
-ifeq ($(HOSTARCH),$(ARCH))
-CROSS_COMPILE ?=
-endif
+
+CROSS_COMPILE = arm-angstrom-linux-gnuoe_explor1.0-
 
 # load other configuration
 include $(TOPDIR)/config.mk
