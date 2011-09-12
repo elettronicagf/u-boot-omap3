@@ -33,7 +33,7 @@
 void set_cpld_gpio(unsigned int gpio_mask, int val);
 int  get_cpld_gpio(unsigned int gpio_mask);
 void set_cpld_muxing (unsigned int muxing_val);
-void init_cpld_gpio();
+void init_cpld_gpio(void);
 
 
 #endif

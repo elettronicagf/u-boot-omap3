@@ -28,7 +28,7 @@ void set_cpld_muxing (unsigned int muxing_val){
 	printf("CPLD: Ricevuto %d\n",response);
 }
 
-static void print_cpld_version()
+static void print_cpld_version(void)
 {
 	unsigned int response;
 	omap3_spi_send_receive(CPLD_GPIO_SPI_CONTROLLER, CPLD_GPIO_SPI_CS, cpld_out_reg, &response);
@@ -38,7 +38,7 @@ static void print_cpld_version()
 }
 
 
-void init_cpld_gpio(){
+void init_cpld_gpio(void){
 /* Load cpld_out */
 	omap3_spi_send_receive(CPLD_GPIO_SPI_CONTROLLER, CPLD_GPIO_SPI_CS, CPLD_READ_GPIO_OUT_MASK, &cpld_out_reg);
 	print_cpld_version();
