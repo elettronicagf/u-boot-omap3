@@ -25,7 +25,6 @@
 #include <twl4030.h>
 #include <asm/io.h>
 #include <asm/arch/mmc_host_def.h>
-#include <asm/arch/mux.h>
 #include <asm/arch/sys_proto.h>
 #include <asm/omap_gpio.h>
 #include <asm/mach-types.h>
@@ -41,6 +40,7 @@ extern struct ehci_hccr *hccr;
 extern volatile struct ehci_hcor *hcor;
 #endif
 #include "omap3egf.h"
+#include "muxing/pinmux_jsf0377_a01.h"
 #include <i2c.h>
 
 #define pr_debug(fmt, args...) debug(fmt, ##args)
@@ -51,15 +51,20 @@ extern volatile struct ehci_hcor *hcor;
 #define EEPROM_I2C_BUS 			1
 
 /* PRODUCT CODE */
-#define REV_STR_TO_REV_CODE(REV_STRING)\
-	(((REV_STRING[8]-'A') << 16) | ((REV_STRING[9]-'0') << 8) |  (REV_STRING[10]-'0'))
+#define REV_STR_TO_REV_CODE(REV_STRING) \
+	(\
+	(((REV_STRING[3]-'0')*1000 + (REV_STRING[4]-'0')*100+(REV_STRING[5]-'0')*10 + (REV_STRING[6]-'0')) << 16)|\
+	((REV_STRING[8]-'A') << 8)|\
+	((REV_STRING[9]-'0')*10 + (REV_STRING[10]-'0'))\
+	)
 
 #define REV_CODE(REV1,REV2,REV3)\
-	(((REV1-'A') << 16) | ((REV2-'0') << 8) |  (REV3-'0'))
+	((REV1<<16) | ((REV2-'A') << 16) |  REV3)
 
-#define REV_NOT_PROGRAMMED  REV_CODE(0xFF,0xFF,0xFF)
-#define REV_A01  REV_CODE('A','0','1')
-#define REV_B01  REV_CODE('B','0','1')
+#define REV_NOT_PROGRAMMED  REV_CODE(((0xFF-'0')*1000 + (0xFF-'0')*100+(0xFF-'0')*10 + 0xff-'0'),'A',0xFF)
+
+#define REV_336_A01  REV_CODE(336,'A',1)
+#define REV_336_B01  REV_CODE(336,'B',1)
 #define PRODUCT_VERSION_LEN  12  /* termination character included. ex: JSC0336_A02*/
 
 DECLARE_GLOBAL_DATA_PTR;
@@ -138,9 +143,10 @@ int misc_init_r(void)
 	printf("Init CPLD...\n");
 	init_cpld_gpio();
 	printf("Init CPLD Muxing");
-	set_cpld_muxing(165);
+	set_cpld_muxing(255);
 
-
+	/* Power display on */
+	set_cpld_gpio(1,1);
 	dieid_num_r();
 
 	return 0;
@@ -154,7 +160,7 @@ int misc_init_r(void)
  */
 void set_muxconf_regs(void)
 {
-	MUX_OMAP3_EGF();
+	MUX_JSF0377_A01();
 }
 
 #ifdef CONFIG_GENERIC_MMC
