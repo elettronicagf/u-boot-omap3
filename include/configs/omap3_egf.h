@@ -198,7 +198,7 @@
 	"mmcargs=setenv bootargs console=${console} " \
 		"mpurate=${mpurate} " \
 		"vram=${vram} " \
-		"omapfb.mode=dvi:${dvimode} " \
+		"omapfb.mode=lcd:${dvimode} " \
 		"omapfb.debug=y " \
 		"omapdss.def_disp=${defaultdisplay} " \
 		"root=${mmcroot} " \
