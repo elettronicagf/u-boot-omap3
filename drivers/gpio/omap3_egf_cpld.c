@@ -21,7 +21,6 @@ void set_cpld_gpio(unsigned int gpio_mask, int val)
 void set_cpld_muxing (unsigned int muxing_val){
 	unsigned int response;
 	unsigned int message=muxing_val;
-	message &= 0xFF;
 	message |= CPLD_WRITE_MUXING_MASK;
 	printf("CPLD: Inviato %d\n",message);
 	omap3_spi_send_receive(CPLD_GPIO_SPI_CONTROLLER,CPLD_GPIO_SPI_CS,message,&response);

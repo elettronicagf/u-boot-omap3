@@ -159,7 +159,7 @@
  MUX_VAL(CP(CAM_STROBE),	(IEN  | PTD | EN  | M4)) /*GPIO_126 TVP5150_IRQ_1V8*/\
  MUX_VAL(CP(CSI2_DX0),		(IEN  | PTU | DIS | M4)) /*GPIO_112 verso CPLD*/\
  MUX_VAL(CP(CSI2_DY0),		(IEN  | PTU | EN  | M4)) /*GPIO_113 da/verso CPLD*/\
- MUX_VAL(CP(CSI2_DX1),		(IEN  | PTU | EN  | M4)) /*GPIO_114 TASTO EMERGENZA*/\
+ MUX_VAL(CP(CSI2_DX1),		(IEN  | PTU | DIS  | M4)) /*GPIO_114 nPEN_IRQ_1V8*/\
  MUX_VAL(CP(CSI2_DY1),		(IEN  | PTU | EN  | M4)) /*GPIO_115 da/verso CPLD*/\
  /*Audio Interface */\
  MUX_VAL(CP(MCBSP2_FSX),	(IEN  | PTD | DIS | M0)) /*McBSP2_FSX*/\
@@ -276,14 +276,14 @@
  MUX_VAL(CP(SYS_CLKOUT2),	(IEN  | PTU | EN  | M4)) /*GPIO_186 POP_INT1 (se connesso su PCB)*/\
  MUX_VAL(CP(ETK_CLK_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_CLK*/\
  MUX_VAL(CP(ETK_CTL_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_CMD*/\
- MUX_VAL(CP(ETK_D0_ES2),	(IEN  | PTD | DIS | M5)) /*MM1_RXRCV usb_mm1_rxrcv_1v8*/\
- MUX_VAL(CP(ETK_D1_ES2),	(IEN  | PTD | DIS | M5)) /*MM1_TXSE0 usb_mm1_txse0_1v8*/\
+ MUX_VAL(CP(ETK_D0_ES2),	(IEN  | PTD | DIS | M7)) /*Unused*/\
+ MUX_VAL(CP(ETK_D1_ES2),	(IEN  | PTD | DIS | M7)) /*Unused*/\
  MUX_VAL(CP(ETK_D2_ES2),	(IDIS | PTD | DIS | M4)) /*GPIO 16*/\
  MUX_VAL(CP(ETK_D3_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_DAT3*/\
  MUX_VAL(CP(ETK_D4_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_DAT0*/\
  MUX_VAL(CP(ETK_D5_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_DAT1*/\
  MUX_VAL(CP(ETK_D6_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_DAT2*/\
- MUX_VAL(CP(ETK_D7_ES2),	(IDIS | PTD | DIS | M5)) /*MM1_TXEN_N usb1_mm1_txen_n_1v8*/\
+ MUX_VAL(CP(ETK_D7_ES2),	(IDIS | PTU | EN  | M4)) /*GPIO_21 - nRESET_TSC_1V8*/\
  MUX_VAL(CP(ETK_D8_ES2),	(IDIS | PTU | EN  | M3)) /* HSUSB1_DIR   CONTROLLARE */\
  MUX_VAL(CP(ETK_D9_ES2),	(IEN  | PTU | DIS | M4)) /*MMC3_ENABLED*/\
  MUX_VAL(CP(D2D_MCAD1),		(IEN  | PTD | EN  | M0)) /*d2d_mcad1*/\

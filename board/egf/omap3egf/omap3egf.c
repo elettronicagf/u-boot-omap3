@@ -143,10 +143,12 @@ int misc_init_r(void)
 	printf("Init CPLD...\n");
 	init_cpld_gpio();
 	printf("Init CPLD Muxing");
-	set_cpld_muxing(255);
+	set_cpld_muxing(CPLD_MUX_EXP_01_OUT | CPLD_MUX_EXP_02_OUT | CPLD_MUX_EXP_03_OUT |
+			CPLD_MUX_EXP_04_OUT | CPLD_MUX_EXP_05_OUT | CPLD_MUX_EXP_06_OUT |
+			CPLD_MUX_EXP_07_OUT | CPLD_MUX_EXP_08_OUT);
 
 	/* Power display on */
-	set_cpld_gpio(1,1);
+	set_cpld_gpio(LCD_VDD_EN,1);
 	dieid_num_r();
 
 	return 0;
