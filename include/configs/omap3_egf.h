@@ -188,8 +188,8 @@
 	"console=ttyO2,115200n8\0 earlyprintk" \
 	"mpurate=auto\0" \
 	"vram=12M\0" \
-	"dvimode=480x272MR-24@60\0" \
-	"defaultdisplay=lcd\0" \
+	"dvimode=1024x768MR-24@60\0" \
+	"defaultdisplay=dvi\0" \
 	"mmcdev=0\0" \
 	"mmcroot=/dev/mmcblk0p2 rw\0" \
 	"mmcrootfstype=ext3 rootwait\0" \
@@ -198,7 +198,7 @@
 	"mmcargs=setenv bootargs console=${console} " \
 		"mpurate=${mpurate} " \
 		"vram=${vram} " \
-		"omapfb.mode=lcd:${dvimode} " \
+		"omapfb.mode=dvi:${dvimode} " \
 		"omapfb.debug=y " \
 		"omapdss.def_disp=${defaultdisplay} " \
 		"root=${mmcroot} " \
