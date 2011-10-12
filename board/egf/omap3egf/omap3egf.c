@@ -100,12 +100,24 @@ int load_revision(void)
 	return 0;
 }
 
+void init_board_gpios()
+{
+	/* Leave tvp5150 enable and reset pins in a consistent state */
+	omap_request_gpio(163);
+	omap_request_gpio(164);
+	omap_set_gpio_direction(163,0);
+	omap_set_gpio_direction(164,0);
+	omap_set_gpio_dataout(163,1);
+	omap_set_gpio_dataout(164,0);
+	return;
+}
 /*
  * Routine: board_init
  * Description: Early hardware init.
  */
 int board_init(void)
 {
+	init_board_gpios();
 	gpmc_init(); /* in SRAM or SDRAM, finish GPMC */
 	/* board id for Linux */
 	gd->bd->bi_arch_number = MACH_TYPE_OMAP3_EGF;
