@@ -139,9 +139,8 @@
 #undef CONFIG_CMD_FPGA		/* FPGA configuration Support	*/
 #undef CONFIG_CMD_IMI		/* iminfo			*/
 #undef CONFIG_CMD_IMLS		/* List all found images	*/
-#undef CONFIG_CMD_NET		/* bootp, tftpboot, rarpboot	*/
+#define CONFIG_CMD_NET		/* bootp, tftpboot, rarpboot	*/
 #undef CONFIG_CMD_NFS		/* NFS support			*/
-
 #define CONFIG_SYS_NO_FLASH
 #define CONFIG_HARD_I2C			1
 #define CONFIG_SYS_I2C_SPEED		100000
@@ -151,6 +150,15 @@
 #define CONFIG_I2C_MULTI_BUS		1
 #define CONFIG_DRIVER_OMAP34XX_I2C	1
 
+
+#if defined(CONFIG_CMD_NET)
+
+#define CONFIG_NET_MULTI
+#define CONFIG_SMC911X
+#define CONFIG_SMC911X_32_BIT
+#define CONFIG_SMC911X_BASE	0x2C000000
+
+#endif /* (CONFIG_CMD_NET) */
 /*
  * TWL4030
  */

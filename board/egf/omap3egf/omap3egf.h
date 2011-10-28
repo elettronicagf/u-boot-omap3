@@ -32,5 +32,11 @@ const omap3_sysinfo sysinfo = {
 	"NAND",
 #endif
 };
+
+#if defined(CONFIG_CMD_NET)
+static void setup_net_chip(void);
+static void reset_net_chip(void);
+#endif
+
 #endif
 

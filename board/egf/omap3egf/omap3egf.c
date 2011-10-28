@@ -24,6 +24,7 @@
 #include <common.h>
 #include <twl4030.h>
 #include <asm/io.h>
+#include <asm/arch/mem.h>
 #include <asm/arch/mmc_host_def.h>
 #include <asm/arch/sys_proto.h>
 #include <asm/omap_gpio.h>
@@ -51,6 +52,7 @@ extern volatile struct ehci_hcor *hcor;
 /* EEPROM */
 #define EEPROM_I2C_BUS 			1
 
+#define OMAP3EGF_GPIO_ETH_RST		64
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -147,6 +149,13 @@ int misc_init_r(void)
 
 	/* Power display on */
 	set_cpld_gpio(LCD_VDD_EN,1);
+
+#if defined(CONFIG_CMD_NET)
+	setup_net_chip();
+	reset_net_chip();
+#endif
+
+
 	dieid_num_r();
 
 	return 0;
@@ -170,6 +179,72 @@ int board_mmc_init(bd_t *bis)
 	return 0;
 }
 #endif
+
+#ifdef CONFIG_CMD_NET
+/*
+ * Routine: setup_net_chip
+ * Description: Setting up the configuration GPMC registers specific to the
+ *		Ethernet hardware.
+ */
+static void setup_net_chip(void)
+{
+	struct ctrl *ctrl_base = (struct ctrl *)OMAP34XX_CTRL_BASE;
+
+	/* Configure GPMC registers */
+	writel(NET_GPMC_CONFIG1, &gpmc_cfg->cs[5].config1);
+	writel(NET_GPMC_CONFIG2, &gpmc_cfg->cs[5].config2);
+	writel(NET_GPMC_CONFIG3, &gpmc_cfg->cs[5].config3);
+	writel(NET_GPMC_CONFIG4, &gpmc_cfg->cs[5].config4);
+	writel(NET_GPMC_CONFIG5, &gpmc_cfg->cs[5].config5);
+	writel(NET_GPMC_CONFIG6, &gpmc_cfg->cs[5].config6);
+	writel(NET_GPMC_CONFIG7, &gpmc_cfg->cs[5].config7);
+
+	/* Enable off mode for NWE in PADCONF_GPMC_NWE register */
+	writew(readw(&ctrl_base ->gpmc_nwe) | 0x0E00, &ctrl_base->gpmc_nwe);
+	/* Enable off mode for NOE in PADCONF_GPMC_NADV_ALE register */
+	writew(readw(&ctrl_base->gpmc_noe) | 0x0E00, &ctrl_base->gpmc_noe);
+	/* Enable off mode for ALE in PADCONF_GPMC_NADV_ALE register */
+	writew(readw(&ctrl_base->gpmc_nadv_ale) | 0x0E00,
+		&ctrl_base->gpmc_nadv_ale);
+}
+
+/**
+ * Reset the ethernet chip.
+ */
+static void reset_net_chip(void)
+{
+	int ret;
+	int rst_gpio;
+
+	rst_gpio = OMAP3EGF_GPIO_ETH_RST;
+
+	ret = omap_request_gpio(rst_gpio);
+	if (ret < 0) {
+		printf("Unable to get GPIO %d\n", rst_gpio);
+		return ;
+	}
+
+	/* Configure as output */
+	omap_set_gpio_direction(rst_gpio, 0);
+
+	/* Send a pulse on the GPIO pin */
+	omap_set_gpio_dataout(rst_gpio, 1);
+	udelay(1);
+	omap_set_gpio_dataout(rst_gpio, 0);
+	udelay(1);
+	omap_set_gpio_dataout(rst_gpio, 1);
+}
+
+int board_eth_init(bd_t *bis)
+{
+	int rc = 0;
+#ifdef CONFIG_SMC911X
+	rc = smc911x_initialize(0, CONFIG_SMC911X_BASE);
+#endif
+	return rc;
+}
+#endif /* CONFIG_CMD_NET */
+
 
 #ifdef CONFIG_USB_EHCI
 
