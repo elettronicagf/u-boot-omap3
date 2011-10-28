@@ -40,8 +40,9 @@ extern struct ehci_hccr *hccr;
 extern volatile struct ehci_hcor *hcor;
 #endif
 #include "omap3egf.h"
-#include "muxing/pinmux_jsf0377_a01.h"
+#include "muxing/pinmux_mbugrf-1.h"
 #include <i2c.h>
+#include "revision_codes.h"
 
 #define pr_debug(fmt, args...) debug(fmt, ##args)
 
@@ -50,22 +51,6 @@ extern volatile struct ehci_hcor *hcor;
 /* EEPROM */
 #define EEPROM_I2C_BUS 			1
 
-/* PRODUCT CODE */
-#define REV_STR_TO_REV_CODE(REV_STRING) \
-	(\
-	(((REV_STRING[3]-'0')*1000 + (REV_STRING[4]-'0')*100+(REV_STRING[5]-'0')*10 + (REV_STRING[6]-'0')) << 16)|\
-	((REV_STRING[8]-'A') << 8)|\
-	((REV_STRING[9]-'0')*10 + (REV_STRING[10]-'0'))\
-	)
-
-#define REV_CODE(REV1,REV2,REV3)\
-	((REV1<<16) | ((REV2-'A') << 16) |  REV3)
-
-#define REV_NOT_PROGRAMMED  REV_CODE(((0xFF-'0')*1000 + (0xFF-'0')*100+(0xFF-'0')*10 + 0xff-'0'),'A',0xFF)
-
-#define REV_336_A01  REV_CODE(336,'A',1)
-#define REV_336_B01  REV_CODE(336,'B',1)
-#define PRODUCT_VERSION_LEN  12  /* termination character included. ex: JSC0336_A02*/
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -73,25 +58,26 @@ static __u32 egf_product_code;
 
 static __u32 get_product_code(void)
 {
-	__u8 product_version[PRODUCT_VERSION_LEN];
-	u32 product_code;
-	int i;
-	i2c_set_bus_num(EEPROM_I2C_BUS);
-	for(i=0; i<PRODUCT_VERSION_LEN-1; i++){
-		if(i2c_read_byte_16bitoffset(0x50, i, &product_version[i])){
-			printf("EEPROM16 read Error\n");
-		}
-	}
-	i2c_set_bus_num(TWL4030_I2C_BUS);
-	product_code = REV_STR_TO_REV_CODE(product_version);
-	if(product_code != REV_NOT_PROGRAMMED){
-		product_version[PRODUCT_VERSION_LEN-1]=0; /* add termination character */
-		printf("Product = %s RevisionCode = %x\n",product_version,product_code);
-	}
-	else {
-		printf("Eeprom not programmed. Selected Default Configuration.\n");
-	}
-	return product_code;
+//	__u8 product_version[PRODUCT_VERSION_LEN];
+//	u32 product_code;
+//	int i;
+//	i2c_set_bus_num(EEPROM_I2C_BUS);
+//	for(i=0; i<PRODUCT_VERSION_LEN-1; i++){
+//		if(i2c_read_byte_16bitoffset(0x50, i, &product_version[i])){
+//			printf("EEPROM16 read Error\n");
+//		}
+//	}
+//	i2c_set_bus_num(TWL4030_I2C_BUS);
+//	product_code = REV_STR_TO_REV_CODE(product_version);
+//	if(product_code != REV_NOT_PROGRAMMED){
+//		product_version[PRODUCT_VERSION_LEN-1]=0; /* add termination character */
+//		printf("Product = %s RevisionCode = %x\n",product_version,product_code);
+//	}
+//	else {
+//		printf("Eeprom not programmed. Selected Default Configuration.\n");
+//	}
+//	return product_code;
+	return 0;
 }
 
 int load_revision(void)
@@ -103,12 +89,12 @@ int load_revision(void)
 void init_board_gpios()
 {
 	/* Leave tvp5150 enable and reset pins in a consistent state */
-	omap_request_gpio(163);
-	omap_request_gpio(164);
-	omap_set_gpio_direction(163,0);
-	omap_set_gpio_direction(164,0);
-	omap_set_gpio_dataout(163,1);
-	omap_set_gpio_dataout(164,0);
+//	omap_request_gpio(163);
+//	omap_request_gpio(164);
+//	omap_set_gpio_direction(163,0);
+//	omap_set_gpio_direction(164,0);
+//	omap_set_gpio_dataout(163,1);
+//	omap_set_gpio_dataout(164,0);
 	return;
 }
 /*
@@ -174,7 +160,7 @@ int misc_init_r(void)
  */
 void set_muxconf_regs(void)
 {
-	MUX_JSF0377_A01();
+	MUX_MBUGRF_1();
 }
 
 #ifdef CONFIG_GENERIC_MMC

@@ -185,10 +185,10 @@
 #define CONFIG_EXTRA_ENV_SETTINGS \
 	"loadaddr=0x82000000\0" \
 	"usbtty=cdc_acm\0" \
-	"console=ttyO2,115200n8\0 earlyprintk" \
+	"console=ttyO2,115200n8 earlyprintk no_console_suspend \0" \
 	"mpurate=auto\0" \
-	"vram=12M\0" \
-	"dvimode=1024x768MR-24@60\0" \
+	"vram=4M\0" \
+	"dvimode=800x600MR-16@60\0" \
 	"defaultdisplay=dvi\0" \
 	"mmcdev=0\0" \
 	"mmcroot=/dev/mmcblk0p2 rw\0" \
