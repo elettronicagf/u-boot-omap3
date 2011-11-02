@@ -198,7 +198,7 @@
 	"vram=4M\0" \
 	"dvimode=800x600MR-16@60\0" \
 	"defaultdisplay=dvi\0" \
-	"mmcdev=0\0" \
+	"mmcdev=0:2\0" \
 	"mmcroot=/dev/mmcblk0p2 rw\0" \
 	"mmcrootfstype=ext3 rootwait\0" \
 	"nandroot=/dev/mtdblock4 rw\0" \
@@ -206,11 +206,9 @@
 	"mmcargs=setenv bootargs console=${console} " \
 		"mpurate=${mpurate} " \
 		"vram=${vram} " \
-		"omapfb.mode=dvi:${dvimode} " \
+		"omapfb.mode=dvi:${dvimode} omapfb.vrfb=n" \
 		"omapfb.debug=y " \
 		"omapdss.def_disp=${defaultdisplay} " \
-		"root=${mmcroot} " \
-		"rootfstype=${mmcrootfstype}\0" \
 	"nandargs=setenv bootargs console=${console} " \
 		"mpurate=${mpurate} " \
 		"vram=${vram} " \
