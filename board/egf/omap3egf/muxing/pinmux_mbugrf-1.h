@@ -193,7 +193,7 @@
  MUX_VAL(CP(MCBSP3_DX),		(IEN  | PTU | EN | M4)) /*GPIO_140  COR_nPSAVE_ADV7123 */\
  MUX_VAL(CP(MCBSP3_DR),		(IEN  | PTU | EN | M4)) /*GPIO_141  COR_RESET#_USB2517 */\
  MUX_VAL(CP(MCBSP3_CLKX),	(IEN  | PTU | EN | M4)) /*GPIO_142  COR_PD#7_TFP410 */\
- MUX_VAL(CP(MCBSP3_FSX),	(IEN  | PTU | EN | M4)) /*GPIO_143  COR_RST#7_TFP410*/\
+ MUX_VAL(CP(MCBSP3_FSX),	(IEN  | PTD | EN | M4)) /*GPIO_143  COR_RST#7_TFP410*/\
  /*Uart 2*/\
  MUX_VAL(CP(UART2_TX),		(IDIS| PTD | DIS| M0)) /*UART2_TX */\
  MUX_VAL(CP(UART2_RTS),		(IDIS| PTD | DIS| M0)) /*UART2_RTS*/\
@@ -237,8 +237,8 @@
  MUX_VAL(CP(I2C1_SDA),		(IEN  | PTU | EN  | M0)) /*I2C1_SDA*/\
  MUX_VAL(CP(I2C2_SCL),		(IEN  | PTU | EN  | M0)) /*I2C2_SCL*/\
  MUX_VAL(CP(I2C2_SDA),		(IEN  | PTU | EN  | M0)) /*I2C2_SDA*/\
- MUX_VAL(CP(I2C3_SCL),		(IEN  | PTU | EN  | M0)) /*I2C3_SCL*/\
- MUX_VAL(CP(I2C3_SDA),		(IEN  | PTU | EN  | M0)) /*I2C3_SDA*/\
+ MUX_VAL(CP(I2C3_SCL),		(IEN  | PTU | EN  | M4)) /*I2C3_SCL GPIO_184 pull-up for TFP410*/\
+ MUX_VAL(CP(I2C3_SDA),		(IEN  | PTD | EN  | M4)) /*I2C3_SDA GPIO_185 pull-down for TFP410*/\
  MUX_VAL(CP(I2C4_SCL),		(IEN  | PTU | EN  | M0)) /*I2C4_SCL*/\
  MUX_VAL(CP(I2C4_SDA),		(IEN  | PTU | EN  | M0)) /*I2C4_SDA*/\
  MUX_VAL(CP(HDQ_SIO),		(IDIS | PTU | EN  | M7)) /*Scollegato al momento. Andrebbe sul connettore esterno CN17 */\
