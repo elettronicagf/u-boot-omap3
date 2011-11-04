@@ -35,7 +35,6 @@
 #include <asm/arch/clocks_omap3.h>
 #include <asm/arch/ehci_omap3.h>
 #include <asm/arch-omap3/omap3_spi.h>
-#include <asm/arch-omap3/omap3_egf_cpld.h>
 /* from drivers/usb/host/ehci-core.h */
 extern struct ehci_hccr *hccr;
 extern volatile struct ehci_hcor *hcor;
@@ -140,15 +139,6 @@ int misc_init_r(void)
 	omap3_spi_init();
 
 	load_revision();
-	printf("Init CPLD...\n");
-	init_cpld_gpio();
-	printf("Init CPLD Muxing");
-	set_cpld_muxing(CPLD_MUX_EXP_01_OUT | CPLD_MUX_EXP_02_OUT | CPLD_MUX_EXP_03_OUT |
-			CPLD_MUX_EXP_04_OUT | CPLD_MUX_EXP_05_OUT | CPLD_MUX_EXP_06_OUT |
-			CPLD_MUX_EXP_07_OUT | CPLD_MUX_EXP_08_OUT);
-
-	/* Power display on */
-	set_cpld_gpio(LCD_VDD_EN,1);
 
 #if defined(CONFIG_CMD_NET)
 	setup_net_chip();
