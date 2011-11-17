@@ -202,6 +202,8 @@
 		"omapfb.debug=y " \
 		"omapdss.def_disp=${defaultdisplay} " \
 		"root=${mmcroot} " \
+		"g_ether.host_addr=58:05:56:00:04:5d " \
+		"g_ether.dev_addr=58:05:56:00:04:5e " \
 		"rootfstype=${mmcrootfstype}\0" \
 	"nandargs=setenv bootargs console=${console} " \
 		"mpurate=${mpurate} " \
