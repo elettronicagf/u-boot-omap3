@@ -204,10 +204,10 @@
  MUX_VAL(CP(UART1_CTS),		(IEN  | PTU | EN | M0)) /*UART1_CTS*/ \
  MUX_VAL(CP(UART1_RX),		(IEN  | PTD | DIS | M0)) /*UART1_RX*/\
  /*FS USB 3*/\
- MUX_VAL(CP(MCBSP4_CLKX),	(IDIS  | PTD | EN | M4)) /*GPIO 152MM3_TX_SE0 usb_mm3_txse0_1v8 */\
- MUX_VAL(CP(MCBSP4_DR),		(IDIS  | PTU | EN | M4)) /*GPIO 153MM3_RXRCV usb_mm3_rxrcv_1v8*/\
- MUX_VAL(CP(MCBSP4_DX),		(IDIS  | PTU | EN | M4)) /*GPIO154MM3_TXDAT usb_mm3_txdat_1v8*/\
- MUX_VAL(CP(MCBSP4_FSX),	(IDIS | PTD | EN | M4))  /*GPIO 155MM3_TXEN_N usb_mm3_txen_n_1v8*/\
+ MUX_VAL(CP(MCBSP4_CLKX),	(IDIS  | PTD | EN | M4)) /*GPIO 152 USB_HUB_VBUS_DET*/\
+ MUX_VAL(CP(MCBSP4_DR),		(IDIS  | PTU | EN | M4)) /*GPIO 153 USB_HUB_EN*/\
+ MUX_VAL(CP(MCBSP4_DX),		(IDIS  | PTU | EN | M4)) /*GPIO 154 3V3_SOM_EN*/\
+ MUX_VAL(CP(MCBSP4_FSX),	(IDIS | PTD | EN | M4))  /*GPIO 155 USB_HUB_RESET*/\
  MUX_VAL(CP(MCBSP1_CLKR),	(IEN  | PTU | DIS | M1)) /*MCSPI4_CLK-> Notare che per far funzionare il loop ho dovuto abilitarlo anche come ingresso */\
  MUX_VAL(CP(MCBSP1_FSR),	(IEN  | PTU | EN  | M4)) /*nPENIRQ-GPIO157*/\
  MUX_VAL(CP(MCBSP1_DX),		(IDIS | PTU | DIS | M1)) /*MCSPI4_SIMO*/\
