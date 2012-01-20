@@ -187,43 +187,22 @@
 	"usbtty=cdc_acm\0" \
 	"console=ttyO2,115200n8\0 earlyprintk" \
 	"mpurate=auto\0" \
-	"vram=12M\0" \
-	"dvimode=1024x768MR-24@60\0" \
-	"defaultdisplay=dvi\0" \
 	"mmcdev=0\0" \
-	"mmcroot=/dev/mmcblk0p2 rw\0" \
-	"mmcrootfstype=ext3 rootwait\0" \
-	"nandroot=/dev/mtdblock4 rw\0" \
-	"nandrootfstype=jffs2\0" \
+	"dspmemargs=\0" \
+	"mmcrootargs=root=/dev/mmcblk0p2 rw rootwait \0" \
 	"mmcargs=setenv bootargs console=${console} " \
 		"mpurate=${mpurate} " \
-		"vram=${vram} " \
-		"omapfb.mode=dvi:${dvimode} " \
-		"omapfb.vrfb=y " \
-		"omapfb.debug=y " \
-		"omapdss.def_disp=${defaultdisplay} " \
-		"root=${mmcroot} " \
-		"g_ether.host_addr=58:05:56:00:04:5d " \
-		"g_ether.dev_addr=58:05:56:00:04:5e " \
-		"rootfstype=${mmcrootfstype}\0" \
-	"nandargs=setenv bootargs console=${console} " \
-		"mpurate=${mpurate} " \
-		"vram=${vram} " \
-		"omapfb.mode=dvi:${dvimode} " \
-		"omapfb.debug=y " \
-		"omapdss.def_disp=${defaultdisplay} " \
-		"root=${nandroot} " \
-		"rootfstype=${nandrootfstype}\0" \
+		"${videoargs} " \
+		"${mmcrootargs} " \
+		"${dspmemargs} " \
+		"${g_etherargs} " \
+		"\0" \
 	"loadbootenv=fatload mmc ${mmcdev} ${loadaddr} uEnv.txt\0" \
 	"importbootenv=echo Importing environment from mmc ...; " \
 		"env import -t $loadaddr $filesize\0" \
 	"loaduimage=fatload mmc ${mmcdev} ${loadaddr} uImage\0" \
 	"mmcboot=echo Booting from mmc ...; " \
 		"run mmcargs; " \
-		"bootm ${loadaddr}\0" \
-	"nandboot=echo Booting from nand ...; " \
-		"run nandargs; " \
-		"nand read ${loadaddr} 280000 400000; " \
 		"bootm ${loadaddr}\0" \
 
 #define CONFIG_BOOTCOMMAND \
@@ -240,7 +219,6 @@
 			"run mmcboot;" \
 		"fi;" \
 	"fi;" \
-	"run nandboot;" \
 
 #define CONFIG_AUTO_COMPLETE		1
 /*
