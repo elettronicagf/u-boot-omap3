@@ -101,19 +101,19 @@
 #define CONFIG_OMAP3_MICRON_DDR		1
 
 /* USB */
-#define CONFIG_MUSB_UDC			1
-#define CONFIG_USB_OMAP3		1
-#define CONFIG_TWL4030_USB		1
+//#define CONFIG_MUSB_UDC			1
+//#define CONFIG_USB_OMAP3		1
+//#define CONFIG_TWL4030_USB		1
 
 /* USB device configuration */
-#define CONFIG_USB_DEVICE		1
-#define CONFIG_USB_TTY			1
-#define CONFIG_SYS_CONSOLE_IS_IN_ENV	1
+//#define CONFIG_USB_DEVICE		1
+//#define CONFIG_USB_TTY			1
+//#define CONFIG_SYS_CONSOLE_IS_IN_ENV	1
 
 /* USB EHCI */
-#define CONFIG_CMD_USB
-#define CONFIG_USB_EHCI
-#define CONFIG_SYS_USB_EHCI_MAX_ROOT_PORTS 3
+//#define CONFIG_CMD_USB
+//#define CONFIG_USB_EHCI
+//#define CONFIG_SYS_USB_EHCI_MAX_ROOT_PORTS 3
 
 /* commands to include */
 #include <config_cmd_default.h>
@@ -121,19 +121,19 @@
 #define CONFIG_CMD_CACHE
 #define CONFIG_CMD_EXT2		/* EXT2 Support			*/
 #define CONFIG_CMD_FAT		/* FAT support			*/
-#define CONFIG_CMD_JFFS2	/* JFFS2 Support		*/
-#define CONFIG_CMD_MTDPARTS	/* Enable MTD parts commands */
-#define CONFIG_MTD_DEVICE	/* needed for mtdparts commands */
-#define MTDIDS_DEFAULT			"nand0=nand"
-#define MTDPARTS_DEFAULT		"mtdparts=nand:512k(x-loader),"\
+//#define CONFIG_CMD_JFFS2	/* JFFS2 Support		*/
+//#define CONFIG_CMD_MTDPARTS	/* Enable MTD parts commands */
+//#define CONFIG_MTD_DEVICE	/* needed for mtdparts commands */
+//#define MTDIDS_DEFAULT			"nand0=nand"
+/*#define MTDPARTS_DEFAULT		"mtdparts=nand:512k(x-loader),"\
 					"1920k(u-boot),128k(u-boot-env),"\
 					"4m(kernel),-(fs)"
-
+*/
 #define CONFIG_CMD_I2C		/* I2C serial bus support	*/
 #define CONFIG_CMD_MMC		/* MMC support			*/
-#define CONFIG_USB_STORAGE	/* USB storage support		*/
-#define CONFIG_CMD_NAND		/* NAND support			*/
-#define CONFIG_CMD_LED		/* LED support			*/
+//#define CONFIG_USB_STORAGE	/* USB storage support		*/
+//#define CONFIG_CMD_NAND		/* NAND support			*/
+//#define CONFIG_CMD_LED		/* LED support			*/
 
 #undef CONFIG_CMD_FLASH		/* flinfo, erase, protect	*/
 #undef CONFIG_CMD_FPGA		/* FPGA configuration Support	*/
@@ -160,23 +160,23 @@
 /*
  * Board NAND Info.
  */
-#define CONFIG_SYS_NAND_QUIET_TEST	1
-#define CONFIG_NAND_OMAP_GPMC
-#define CONFIG_SYS_NAND_ADDR		NAND_BASE	/* physical address */
+//#define CONFIG_SYS_NAND_QUIET_TEST	1
+//#define CONFIG_NAND_OMAP_GPMC
+//#define CONFIG_SYS_NAND_ADDR		NAND_BASE	/* physical address */
 							/* to access nand */
-#define CONFIG_SYS_NAND_BASE		NAND_BASE	/* physical address */
+//#define CONFIG_SYS_NAND_BASE		NAND_BASE	/* physical address */
 							/* to access nand at */
 							/* CS0 */
-#define GPMC_NAND_ECC_LP_x16_LAYOUT	1
+//#define GPMC_NAND_ECC_LP_x16_LAYOUT	1
 
-#define CONFIG_SYS_MAX_NAND_DEVICE	1		/* Max number of NAND */
+//#define CONFIG_SYS_MAX_NAND_DEVICE	1		/* Max number of NAND */
 							/* devices */
-#define CONFIG_JFFS2_NAND
+//#define CONFIG_JFFS2_NAND
 /* nand device jffs2 lives on */
-#define CONFIG_JFFS2_DEV		"nand0"
+//#define CONFIG_JFFS2_DEV		"nand0"
 /* start of jffs2 partition */
-#define CONFIG_JFFS2_PART_OFFSET	0x680000
-#define CONFIG_JFFS2_PART_SIZE		0xf980000	/* size of jffs2 */
+//#define CONFIG_JFFS2_PART_OFFSET	0x680000
+//#define CONFIG_JFFS2_PART_SIZE		0xf980000	/* size of jffs2 */
 							/* partition */
 
 /* Environment information */
@@ -275,6 +275,7 @@
 /* SDRAM Bank Allocation method */
 #define SDRC_R_B_C		1
 
+#define CONFIG_ENV_IS_NOWHERE 1
 /*-----------------------------------------------------------------------
  * FLASH and environment organization
  */
@@ -282,26 +283,26 @@
 /* **** PISMO SUPPORT *** */
 
 /* Configure the PISMO */
-#define PISMO1_NAND_SIZE		GPMC_SIZE_128M
-#define PISMO1_ONEN_SIZE		GPMC_SIZE_128M
+//#define PISMO1_NAND_SIZE		GPMC_SIZE_128M
+//#define PISMO1_ONEN_SIZE		GPMC_SIZE_128M
 
-#define CONFIG_SYS_MONITOR_LEN		(256 << 10)	/* Reserve 2 sectors */
+//#define CONFIG_SYS_MONITOR_LEN		(256 << 10)	/* Reserve 2 sectors */
 
-#if defined(CONFIG_CMD_NAND)
-#define CONFIG_SYS_FLASH_BASE		PISMO1_NAND_BASE
-#endif
+//#if defined(CONFIG_CMD_NAND)
+//#define CONFIG_SYS_FLASH_BASE		PISMO1_NAND_BASE
+//#endif
 
 /* Monitor at start of flash */
-#define CONFIG_SYS_MONITOR_BASE		CONFIG_SYS_FLASH_BASE
-#define CONFIG_SYS_ONENAND_BASE		ONENAND_MAP
+//#define CONFIG_SYS_MONITOR_BASE		CONFIG_SYS_FLASH_BASE
+//#define CONFIG_SYS_ONENAND_BASE		ONENAND_MAP
 
-#define CONFIG_ENV_IS_IN_NAND		1
-#define ONENAND_ENV_OFFSET		0x260000 /* environment starts here */
-#define SMNAND_ENV_OFFSET		0x260000 /* environment starts here */
+//#define CONFIG_ENV_IS_IN_NAND		1
+//#define ONENAND_ENV_OFFSET		0x260000 /* environment starts here */
+//#define SMNAND_ENV_OFFSET		0x260000 /* environment starts here */
 
-#define CONFIG_SYS_ENV_SECT_SIZE	(128 << 10)	/* 128 KiB */
-#define CONFIG_ENV_OFFSET		SMNAND_ENV_OFFSET
-#define CONFIG_ENV_ADDR			SMNAND_ENV_OFFSET
+//#define CONFIG_SYS_ENV_SECT_SIZE	(128 << 10)	/* 128 KiB */
+//#define CONFIG_ENV_OFFSET		SMNAND_ENV_OFFSET
+//#define CONFIG_ENV_ADDR			SMNAND_ENV_OFFSET
 
 #define CONFIG_SYS_SDRAM_BASE		PHYS_SDRAM_1
 #define CONFIG_SYS_INIT_RAM_ADDR	0x4020f800

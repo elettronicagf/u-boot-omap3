@@ -18,12 +18,12 @@
 * MA 02111-1307 USA
 */
 
-#ifndef _PINMUX_JSF0377_A01_H_
-#define _PINMUX_JSF0377_A01_H_
+#ifndef _PINMUX_JSF0396_A01_H_
+#define _PINMUX_JSF0396_A01_H_
 
 #include <asm/arch/mux.h>
 
-#define MUX_JSF0377_A01() \
+#define MUX_JSF0396_A01() \
  MUX_VAL(CP(SDRC_D0),		(IEN  | PTD | DIS | M0)) /*SDRC_D0*/\
  MUX_VAL(CP(SDRC_D1),		(IEN  | PTD | DIS | M0)) /*SDRC_D1*/\
  MUX_VAL(CP(SDRC_D2),		(IEN  | PTD | DIS | M0)) /*SDRC_D2*/\

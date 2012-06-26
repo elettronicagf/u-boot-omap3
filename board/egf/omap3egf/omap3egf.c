@@ -28,19 +28,19 @@
 #include <asm/arch/sys_proto.h>
 #include <asm/omap_gpio.h>
 #include <asm/mach-types.h>
+#include <asm/arch-omap3/omap3_spi.h>
+#include <asm/arch-omap3/omap3_egf_cpld.h>
 #ifdef CONFIG_USB_EHCI
 #include <usb.h>
 #include <asm/arch/clocks.h>
 #include <asm/arch/clocks_omap3.h>
 #include <asm/arch/ehci_omap3.h>
-#include <asm/arch-omap3/omap3_spi.h>
-#include <asm/arch-omap3/omap3_egf_cpld.h>
 /* from drivers/usb/host/ehci-core.h */
 extern struct ehci_hccr *hccr;
 extern volatile struct ehci_hcor *hcor;
 #endif
 #include "omap3egf.h"
-#include "muxing/pinmux_jsf0377_a01.h"
+#include "muxing/pinmux_jsf0396_a01.h"
 #include <i2c.h>
 
 #define pr_debug(fmt, args...) debug(fmt, ##args)
@@ -174,7 +174,7 @@ int misc_init_r(void)
  */
 void set_muxconf_regs(void)
 {
-	MUX_JSF0377_A01();
+	MUX_JSF0396_A01();
 }
 
 #ifdef CONFIG_GENERIC_MMC
