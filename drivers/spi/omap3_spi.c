@@ -203,12 +203,18 @@ static void resetController(volatile unsigned int* base) {
 	volatile unsigned int tmp;
 	base[OMAP2_MCSPI_SYSCONFIG] |= 0x2;
 	tmp = base[OMAP2_MCSPI_SYSSTATUS];
+#ifdef VERBOSE
 	printf("waiting for reset OMAP2_MCSPI_SYSSTATUS %x\n", tmp);
+#endif
 	while (!(tmp & 0x01)) {
 		tmp = base[OMAP2_MCSPI_SYSSTATUS];
+#ifdef VERBOSE
 		printf("waiting for reset OMAP2_MCSPI_SYSSTATUS %x\n", tmp);
+#endif
 	}
+#ifdef VERBOSE
 	printf("Reset OK\n");
+#endif
 
 }
 static volatile unsigned int* get_spi_base(int nController) {
