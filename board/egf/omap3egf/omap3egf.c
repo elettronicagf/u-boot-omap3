@@ -100,7 +100,7 @@ int load_revision(void)
 	return 0;
 }
 
-void init_board_gpios()
+void init_board_gpios(void)
 {
 	/* Leave tvp5150 enable and reset pins in a consistent state */
 	omap_request_gpio(163);
@@ -155,12 +155,20 @@ int misc_init_r(void)
 	printf("Init CPLD...\n");
 	init_cpld_gpio();
 	printf("Init CPLD Muxing");
-	set_cpld_muxing(CPLD_MUX_EXP_01_OUT | CPLD_MUX_EXP_02_OUT | CPLD_MUX_EXP_03_OUT |
-			CPLD_MUX_EXP_04_OUT | CPLD_MUX_EXP_05_OUT | CPLD_MUX_EXP_06_OUT |
-			CPLD_MUX_EXP_07_OUT | CPLD_MUX_EXP_08_OUT);
+	/*
+	 * CPLD_EXP01	<=	IOEXT-nInt		-> GPIO2
+	 * CPLD_EXP02	=>	IOEXT-nRst		-> GPIO3
+	 * CPLD_EXP03	<=	nPWRFAIL		-> GPIO4
+	 * CPLD_EXP04	=>	SD-WP			-> GPIO6
+	 * CPLD_EXP05	=>	BKL-EN			-> GPIO7
+	 * CPLD_EXP06	=>	TFT-RST			-> GPIO224
+	 * CPLD_EXP07	=>	HDMI-EN			-> GPIO225
+	 * CPLD_EXP08	<=	AES3-INT		-> GPIO61
+	 */
+	set_cpld_muxing( CPLD_MUX_EXP_02_OUT | CPLD_MUX_EXP_04_OUT |
+			CPLD_MUX_EXP_05_OUT | CPLD_MUX_EXP_06_OUT |
+			CPLD_MUX_EXP_07_OUT);
 
-	/* Power display on */
-	set_cpld_gpio(LCD_VDD_EN,1);
 	dieid_num_r();
 
 	return 0;
