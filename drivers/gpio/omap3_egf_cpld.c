@@ -33,7 +33,7 @@ static void print_cpld_version(void)
 	omap3_spi_send_receive(CPLD_GPIO_SPI_CONTROLLER, CPLD_GPIO_SPI_CS, cpld_out_reg, &response);
 	int major = (response >> 22) & 0x0F;
 	int minor = (response >> 14) & 0xFF;
-	printf("Explor: CPLD Firmware Version %d.%d\n",major,minor);
+	printf("CPLD: Firmware Version %d.%d\n",major,minor);
 }
 
 
