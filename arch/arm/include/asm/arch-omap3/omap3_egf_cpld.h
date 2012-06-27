@@ -1,7 +1,7 @@
 #ifndef _OMAP3_EGF_CPLD_H_
 #define _OMAP3_EGF_CPLD_H_
 
-#define LCD_VDD_EN       		(1<<0)
+#define EEPROM_WP_107      		(1<<0)
 #define EXT_DISPLAY_EN_3V3		(1<<1)
 #define DISP_1V8_NEN_3V3	    (1<<2)
 #define AUDIO_SEL1_1V8      	(1<<3)
