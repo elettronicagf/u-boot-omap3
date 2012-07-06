@@ -136,10 +136,11 @@
  MUX_VAL(CP(DSS_DATA21),	(IDIS | PTD | DIS | M0)) /*DSS_DATA21*/\
  MUX_VAL(CP(DSS_DATA22),	(IDIS | PTD | DIS | M0)) /*DSS_DATA22*/\
  MUX_VAL(CP(DSS_DATA23),	(IDIS | PTD | DIS | M0)) /*DSS_DATA23*/\
- /*CAMERA*/\
- MUX_VAL(CP(CAM_HS),		(IEN  | PTU | EN  | M4)) /*CAM_HS */\
+ /*CAMERA  TVP5151*/\
+ MUX_VAL(CP(MMC2_DAT6),		(IDIS | PTU | EN  | M4)) /*GPIO_138 TVP5151-IN-SEL */\
+ MUX_VAL(CP(CAM_HS),		(IEN  | PTU | EN  | M4)) /*GPIO_94 Non usiamo il segnale HSYNC del TVP5150*/\
  MUX_VAL(CP(CAM_VS),		(IEN  | PTU | EN  | M0)) /*CAM_VS */\
- MUX_VAL(CP(CAM_XCLKA),		(IDIS | PTD | DIS | M4)) /*GPIO_96 USB_HOST_nEN abilita alimentazione alle porte HS USB2 e FS USB3*/\
+ MUX_VAL(CP(CAM_XCLKA),		(IEN  | PTD | EN  | M7)) /*NC*/\
  MUX_VAL(CP(CAM_PCLK),		(IEN  | PTU | EN  | M0)) /*CAM_PCLK*/\
  MUX_VAL(CP(CAM_FLD),		(IDIS | PTD | DIS | M4)) /*GPIO_98 Non usiamo il segnale FID del TVP5150*/\
  MUX_VAL(CP(CAM_D0),		(IEN  | PTD | DIS | M0)) /*CAM_D0*/\
@@ -150,17 +151,17 @@
  MUX_VAL(CP(CAM_D5),		(IEN  | PTD | DIS | M0)) /*CAM_D5*/\
  MUX_VAL(CP(CAM_D6),		(IEN  | PTD | DIS | M0)) /*CAM_D6*/\
  MUX_VAL(CP(CAM_D7),		(IEN  | PTD | DIS | M0)) /*CAM_D7*/\
- MUX_VAL(CP(CAM_D8),		(IEN  | PTD | EN  | M4)) /*GPIO_107 EEPROM_WP_107*/\
- MUX_VAL(CP(CAM_D9),		(IDIS | PTD | DIS | M4)) /*GPIO_108 MCSPI1-0_select*/\
- MUX_VAL(CP(CAM_D10),		(IEN  | PTU | EN  | M4)) /*GPIO_109 USB_HOST_nFAULT errore su alimentazione HS USB2 e FS USB3 */\
- MUX_VAL(CP(CAM_D11),		(IDIS | PTD | DIS | M4)) /*GPIO_110 HSUSB2_nRESET */\
- MUX_VAL(CP(CAM_XCLKB),		(IEN  | PTU | EN  | M4)) /*GPIO_111 USB_HOST_SOFTCON Segnale SOFTCON del TUSB2551 transceiver*/\
- MUX_VAL(CP(CAM_WEN),		(IEN  | PTD | DIS | M7)) /*Disconnesso */\
- MUX_VAL(CP(CAM_STROBE),	(IEN  | PTD | EN  | M4)) /*GPIO_126 TVP5150_IRQ_1V8*/\
- MUX_VAL(CP(CSI2_DX0),		(IEN  | PTU | DIS | M4)) /*GPIO_112 verso CPLD*/\
- MUX_VAL(CP(CSI2_DY0),		(IEN  | PTU | EN  | M4)) /*GPIO_113 da/verso CPLD*/\
- MUX_VAL(CP(CSI2_DX1),		(IEN  | PTU | DIS  | M4)) /*GPIO_114 nPEN_IRQ_1V8*/\
- MUX_VAL(CP(CSI2_DY1),		(IEN  | PTU | EN  | M4)) /*GPIO_115 da/verso CPLD*/\
+ MUX_VAL(CP(CAM_D8),		(IEN  | PTD | EN  | M7)) /*NC*/\
+ MUX_VAL(CP(CAM_D9),		(IEN  | PTD | EN  | M7)) /*NC*/\
+ MUX_VAL(CP(CAM_D10),		(IEN  | PTD | EN  | M7)) /*NC*/\
+ MUX_VAL(CP(CAM_D11),		(IEN  | PTD | EN  | M7)) /*NC*/\
+ MUX_VAL(CP(CAM_XCLKB),		(IEN  | PTD | EN  | M7)) /*NC*/\
+ MUX_VAL(CP(CAM_WEN),		(IEN  | PTD | EN  | M7)) /*NC */\
+ MUX_VAL(CP(CAM_STROBE),	(IEN  | PTD | EN  | M7)) /*NC*/\
+ MUX_VAL(CP(CSI2_DX0),		(IEN  | PTU | DIS | M4)) /*GPIO_112 IRQ-01_1V8*/\
+ MUX_VAL(CP(CSI2_DY0),		(IEN  | PTU | EN  | M4)) /*GPIO_113 CPLD_IRQ_1V8*/\
+ MUX_VAL(CP(CSI2_DX1),		(IEN  | PTU | DIS | M4)) /*GPIO_114 nPEN_IRQ_1V8*/\
+ MUX_VAL(CP(CSI2_DY1),		(IEN  | PTU | EN  | M4)) /*GPIO_115 TVP5151_IRQ_1v8 CPLD*/\
  /*Audio Interface */\
  MUX_VAL(CP(MCBSP2_FSX),	(IEN  | PTD | DIS | M0)) /*McBSP2_FSX*/\
  MUX_VAL(CP(MCBSP2_CLKX),	(IEN  | PTD | DIS | M0)) /*McBSP2_CLKX*/\
@@ -184,10 +185,16 @@
  MUX_VAL(CP(MMC2_DAT1),		(IEN  | PTU | EN  | M0)) /*MMC2_DAT1 */\
  MUX_VAL(CP(MMC2_DAT2),		(IEN  | PTU | EN  | M0)) /*MMC2_DAT2 */\
  MUX_VAL(CP(MMC2_DAT3),		(IEN  | PTU | EN  | M0)) /*MMC2_DAT3 */\
- MUX_VAL(CP(MMC2_DAT4),		(IEN  | PTU | EN  | M4)) /*GPIO_136 TASTO F1*/\
- MUX_VAL(CP(MMC2_DAT5),		(IEN  | PTU | EN  | M4)) /*GPIO_137 TASTO F2*/\
- MUX_VAL(CP(MMC2_DAT6),		(IDIS | PTU | EN  | M4)) /*GPIO_138 power off verso CPLD */\
  MUX_VAL(CP(MMC2_DAT7),		(IEN  | PTD | DIS | M1)) /*MMC2_CLKIN */\
+ MUX_VAL(CP(MMC2_DAT4),		(IEN  | PTU | EN  | M7)) /*NC*/\
+ MUX_VAL(CP(MMC2_DAT5),		(IEN  | PTU | EN  | M7)) /*NC*/\
+ /*MMC3 */\
+ MUX_VAL(CP(ETK_CLK_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_CLK*/\
+ MUX_VAL(CP(ETK_CTL_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_CMD*/\
+ MUX_VAL(CP(ETK_D3_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_DAT3*/\
+ MUX_VAL(CP(ETK_D4_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_DAT0*/\
+ MUX_VAL(CP(ETK_D5_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_DAT1*/\
+ MUX_VAL(CP(ETK_D6_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_DAT2*/\
  /* Interfaccia Programmazione CPLD */\
  MUX_VAL(CP(MCBSP3_DX),		(IDIS | PTU | EN | M4)) /*GPIO_140  TDI */\
  MUX_VAL(CP(MCBSP3_DR),		(IDIS | PTU | EN | M4)) /*GPIO_141  TMS */\
@@ -209,15 +216,15 @@
  MUX_VAL(CP(MCBSP4_DX),		(IDIS  | PTU | EN | M4)) /*GPIO 154 3V3_SOM_EN*/\
  MUX_VAL(CP(MCBSP4_FSX),	(IDIS | PTD | EN | M4))  /*GPIO 155 USB_HUB_RESET*/\
  MUX_VAL(CP(MCBSP1_CLKR),	(IEN  | PTU | DIS | M1)) /*MCSPI4_CLK-> Notare che per far funzionare il loop ho dovuto abilitarlo anche come ingresso */\
- MUX_VAL(CP(MCBSP1_FSR),	(IEN  | PTU | EN  | M4)) /*nPENIRQ-GPIO157*/\
+ MUX_VAL(CP(MCBSP1_FSR),	(IEN  | PTU | DIS | M0)) /*MCBSP1_FSR*/\
+ MUX_VAL(CP(MCBSP1_CLKX),	(IEN  | PTU | DIS | M0)) /*MCBSP1_CLKX*/\
  MUX_VAL(CP(MCBSP1_DX),		(IDIS | PTU | DIS | M1)) /*MCSPI4_SIMO*/\
  MUX_VAL(CP(MCBSP1_DR),		(IEN  | PTU | EN  | M1)) /*MCSPI4_SOMI*/\
- MUX_VAL(CP(MCBSP_CLKS),	(IEN  | PTU | DIS | M0)) /*McBSP_CLKS*/\
  MUX_VAL(CP(MCBSP1_FSX),	(IDIS | PTD | DIS | M1)) /*MCSPI4_CS0*/\
- MUX_VAL(CP(MCBSP1_CLKX),	(IEN  | PTU | EN  | M4)) /*nIRQ-GPIO162-ETH*/\
+ MUX_VAL(CP(MCBSP_CLKS),	(IEN  | PTU | DIS | M0)) /*MCBSP_CLKS FROM Companion*/\
  /*Serial Interface*/\
- MUX_VAL(CP(UART3_CTS_RCTX),	(IEN  | PTU | EN  | M4)) /*GPIO163 MEMS_INT2 */\
- MUX_VAL(CP(UART3_RTS_SD),	(IEN  | PTU | EN  | M4)) /*GPIO164 MEMS_INT1 */\
+ MUX_VAL(CP(UART3_CTS_RCTX),(IEN  | PTU | EN  | M4)) /*GPIO163 TVP5151-ENABLE */\
+ MUX_VAL(CP(UART3_RTS_SD),	(IEN  | PTU | EN  | M4)) /*GPIO164 TVP5151-nRESET */\
  MUX_VAL(CP(UART3_RX_IRRX),	(IEN  | PTD | DIS | M0)) /*UART3_RX_IRRX*/\
  MUX_VAL(CP(UART3_TX_IRTX),	(IDIS | PTD | DIS | M0)) /*UART3_TX_IRTX*/\
  MUX_VAL(CP(HSUSB0_CLK),	(IEN  | PTD | DIS | M0)) /*HSUSB0_CLK*/\
@@ -241,6 +248,7 @@
  MUX_VAL(CP(I2C4_SCL),		(IEN  | PTU | EN  | M0)) /*I2C4_SCL*/\
  MUX_VAL(CP(I2C4_SDA),		(IEN  | PTU | EN  | M0)) /*I2C4_SDA*/\
  MUX_VAL(CP(HDQ_SIO),		(IDIS | PTU | EN  | M7)) /*Scollegato al momento. Andrebbe sul connettore esterno CN17 */\
+ /* McSPI1 */\
  MUX_VAL(CP(MCSPI1_CLK),	(IEN  | PTU | DIS | M0)) /*McSPI1_CLK*/\
  MUX_VAL(CP(MCSPI1_SIMO),	(IDIS | PTU | DIS | M0)) /*McSPI1_SIMO*/\
  MUX_VAL(CP(MCSPI1_SOMI),	(IEN  | PTD | DIS | M0)) /*McSPI1_SOMI*/\
@@ -274,17 +282,11 @@
  MUX_VAL(CP(SYS_OFF_MODE),	(IEN  | PTD | DIS | M0)) /*SYS_OFF_MODE*/\
  MUX_VAL(CP(SYS_CLKOUT1),	(IEN  | PTU | EN  | M4)) /*GPIO_10 POP_TMP (se connesso su PCB)*/\
  MUX_VAL(CP(SYS_CLKOUT2),	(IEN  | PTU | EN  | M4)) /*GPIO_186 POP_INT1 (se connesso su PCB)*/\
- MUX_VAL(CP(ETK_CLK_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_CLK*/\
- MUX_VAL(CP(ETK_CTL_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_CMD*/\
  MUX_VAL(CP(ETK_D0_ES2),	(IEN  | PTD | DIS | M7)) /*Unused*/\
  MUX_VAL(CP(ETK_D1_ES2),	(IEN  | PTD | DIS | M7)) /*Unused*/\
  MUX_VAL(CP(ETK_D2_ES2),	(IDIS | PTD | DIS | M4)) /*GPIO 16*/\
- MUX_VAL(CP(ETK_D3_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_DAT3*/\
- MUX_VAL(CP(ETK_D4_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_DAT0*/\
- MUX_VAL(CP(ETK_D5_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_DAT1*/\
- MUX_VAL(CP(ETK_D6_ES2),	(IEN  | PTU | DIS | M2)) /*MMC3_DAT2*/\
  MUX_VAL(CP(ETK_D7_ES2),	(IDIS | PTU | EN  | M4)) /*GPIO_21 - nRESET_TSC_1V8*/\
- MUX_VAL(CP(ETK_D8_ES2),	(IDIS | PTU | EN  | M3)) /* HSUSB1_DIR   CONTROLLARE */\
+ MUX_VAL(CP(ETK_D8_ES2),	(IEN  | PTU | EN  | M4)) /*GPIO_22 -> mSecure RTC Companion. Default Unsecured */\
  MUX_VAL(CP(ETK_D9_ES2),	(IEN  | PTU | DIS | M4)) /*GPIO_23 UART485 DIR*/\
  MUX_VAL(CP(D2D_MCAD1),		(IEN  | PTD | EN  | M0)) /*d2d_mcad1*/\
  MUX_VAL(CP(D2D_MCAD2),		(IEN  | PTD | EN  | M0)) /*d2d_mcad2*/\
