@@ -160,7 +160,6 @@ int misc_init_r(void)
 			CPLD_MUX_EXP_07_OUT | CPLD_MUX_EXP_08_OUT);
 
 	/* Power display on */
-	set_cpld_gpio(LCD_VDD_EN,1);
 	dieid_num_r();
 
 	return 0;
