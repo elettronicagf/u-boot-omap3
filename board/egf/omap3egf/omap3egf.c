@@ -134,17 +134,12 @@ int board_init(void)
  */
 int misc_init_r(void)
 {
-	struct control_prog_io *prog_io_base = (struct control_prog_io *)OMAP34XX_CTRL_BASE;
-
 
 	#ifdef CONFIG_DRIVER_OMAP34XX_I2C
 		printf("i2c init...\n");
 		i2c_init(CONFIG_SYS_I2C_SPEED, CONFIG_SYS_I2C_SLAVE);
 	#endif
 
-
-	/* Enable i2c2 pullup resisters */
-	writel(~(PRG_I2C2_PULLUPRESX), &prog_io_base->io1);
 
 	twl4030_power_init();
 	twl4030_led_init(TWL4030_LED_LEDEN_LEDAON | TWL4030_LED_LEDEN_LEDBON);
