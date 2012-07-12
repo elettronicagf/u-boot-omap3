@@ -74,6 +74,7 @@ static __u32 egf_product_code;
 static __u32 get_product_code(void)
 {
 	__u8 product_version[PRODUCT_VERSION_LEN];
+	__u8 somrevbootargs[PRODUCT_VERSION_LEN + 9];//8 is the lenght of " somrev="
 	u32 product_code;
 	int i;
 	i2c_set_bus_num(EEPROM_I2C_BUS);
@@ -87,6 +88,9 @@ static __u32 get_product_code(void)
 	if(product_code != REV_NOT_PROGRAMMED){
 		product_version[PRODUCT_VERSION_LEN-1]=0; /* add termination character */
 		printf("Product = %s RevisionCode = %x\n",product_version,product_code);
+		strcpy(somrevbootargs," somrev=");
+		strcat(somrevbootargs,product_version);
+		setenv("somrevbootargs",somrevbootargs);
 	}
 	else {
 		printf("Eeprom not programmed. Selected Default Configuration.\n");

@@ -181,7 +181,7 @@
 
 /* Environment information */
 #define CONFIG_BOOTDELAY		1
-
+#define CONFIG_ADD_SOM_REV_BOOTPARAM
 #define CONFIG_EXTRA_ENV_SETTINGS \
 	"loadaddr=0x82000000\0" \
 	"usbtty=cdc_acm\0" \
