@@ -1,5 +1,7 @@
 mpurate=800
 dspmemargs=mem=55M@0x80000000 mem=128M@0x88000000
 videoargs=vram=12M omapfb.mode=dvi:1024x768MR-24@60 omapfb.vrfb=y omapdss.def_disp=dvi
+omapdss.def_disp=dvi
+console=ttyO2,115200n8 earlyprintk  somrev=JSF0336_D01
 g_etherargs=g_ether.host_addr=58:05:56:00:04:5d g_ether.dev_addr=58:05:56:00:04:5e
 
