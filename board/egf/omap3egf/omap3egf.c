@@ -159,16 +159,21 @@ int misc_init_r(void)
 	 * CPLD_EXP01	<=	IOEXT-nInt		-> GPIO2
 	 * CPLD_EXP02	=>	IOEXT-nRst		-> GPIO3
 	 * CPLD_EXP03	<=	nPWRFAIL		-> GPIO4
-	 * CPLD_EXP04	=>	SD-WP			-> GPIO6
+	 * CPLD_EXP04	<=	SD-WP			-> GPIO6
 	 * CPLD_EXP05	=>	BKL-EN			-> GPIO7
 	 * CPLD_EXP06	=>	TFT-RST			-> GPIO224
 	 * CPLD_EXP07	=>	HDMI-EN			-> GPIO225
 	 * CPLD_EXP08	<=	AES3-INT		-> GPIO61
 	 */
-	set_cpld_muxing( CPLD_MUX_EXP_02_OUT | CPLD_MUX_EXP_04_OUT |
+	set_cpld_muxing( CPLD_MUX_EXP_02_OUT |
 			CPLD_MUX_EXP_05_OUT | CPLD_MUX_EXP_06_OUT |
 			CPLD_MUX_EXP_07_OUT);
-
+	/* Switch on the power for WLAN section.
+	 * We put in u-boot because it's easier than add a regulator
+	 * to the wl12xx driver and because of initiliazation sequence
+	 * in gpio_spi driver.
+	 */
+	set_cpld_gpio(MMC3_ENABLE_3V3,1);
 	dieid_num_r();
 
 	return 0;
