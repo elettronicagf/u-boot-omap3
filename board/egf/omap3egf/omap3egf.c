@@ -134,7 +134,15 @@ int board_init(void)
  */
 int misc_init_r(void)
 {
+	/* Disabling 52MHz SpeedCtrl according to problem with some SD Card with SOM336 MMC1 slot
+	 * Bit 20 OMAP3630_PRG_SDMMC1_SPEEDCTRL	is enabled by default.
+	 * we reset it.
+	 * */
 	struct control_prog_io *prog_io_base = (struct control_prog_io *)OMAP34XX_CTRL_BASE;
+	if (get_cpu_family() == CPU_OMAP36XX){
+		printf("prog_io1 resetting speedctrl ...\n");
+		writel(PRG_I2C2_PULLUPRESX, &prog_io_base->io1);
+	}
 
 
 	#ifdef CONFIG_DRIVER_OMAP34XX_I2C
@@ -142,9 +150,6 @@ int misc_init_r(void)
 		i2c_init(CONFIG_SYS_I2C_SPEED, CONFIG_SYS_I2C_SLAVE);
 	#endif
 
-
-	/* Enable i2c2 pullup resisters */
-	writel(~(PRG_I2C2_PULLUPRESX), &prog_io_base->io1);
 
 	twl4030_power_init();
 	twl4030_led_init(TWL4030_LED_LEDEN_LEDAON | TWL4030_LED_LEDEN_LEDBON);
