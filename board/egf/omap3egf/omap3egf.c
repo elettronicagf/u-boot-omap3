@@ -172,13 +172,15 @@ int misc_init_r(void)
 	 */
 	set_cpld_muxing( CPLD_MUX_EXP_02_OUT |
 			CPLD_MUX_EXP_05_OUT | CPLD_MUX_EXP_06_OUT |
-			CPLD_MUX_EXP_07_OUT);
+			CPLD_MUX_EXP_07_OUT | CPLD_MCSPI1_CS1_ENABLED);
 	/* Switch on the power for WLAN section.
 	 * We put in u-boot because it's easier than add a regulator
 	 * to the wl12xx driver and because of initiliazation sequence
 	 * in gpio_spi driver.
 	 */
 	set_cpld_gpio(MMC3_ENABLE_3V3,1);
+	set_cpld_gpio(EXT_DISPLAY_EN_3V3,1);
+
 	dieid_num_r();
 
 	return 0;
