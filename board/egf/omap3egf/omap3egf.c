@@ -63,8 +63,6 @@ extern volatile struct ehci_hcor *hcor;
 
 #define REV_NOT_PROGRAMMED  REV_CODE(((0xFF-'0')*1000 + (0xFF-'0')*100+(0xFF-'0')*10 + 0xff-'0'),'A',0xFF)
 
-#define REV_336_A01  REV_CODE(336,'A',1)
-#define REV_336_B01  REV_CODE(336,'B',1)
 #define PRODUCT_VERSION_LEN  12  /* termination character included. ex: JSC0336_A02*/
 
 DECLARE_GLOBAL_DATA_PTR;
