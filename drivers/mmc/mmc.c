@@ -1120,7 +1120,8 @@ int mmc_startup(struct mmc *mmc)
 	sprintf(mmc->block_dev.revision, "%d.%d", mmc->cid[2] >> 28,
 			(mmc->cid[2] >> 24) & 0xf);
 	init_part(&mmc->block_dev);
-
+	printf("delaying at end of mmc_startup\n");
+	udelay(1000000);
 	return 0;
 }
 
