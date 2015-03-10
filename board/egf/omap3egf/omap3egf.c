@@ -161,7 +161,7 @@ int misc_init_r(void)
 	printf("Init CPLD...\n");
 	init_cpld_gpio();
 	printf("Init CPLD Muxing\n");
-	set_cpld_muxing(CPLD_MUX_EXP_04_OUT | CPLD_MUX_EXP_05_OUT | CPLD_MUX_EXP_06_OUT |
+	set_cpld_muxing(CPLD_MUX_EXP_05_OUT | CPLD_MUX_EXP_06_OUT |
 			CPLD_MUX_EXP_08_OUT | CPLD_MCSPI1_CS1_ENABLED);
 
 	/* Power display on */
