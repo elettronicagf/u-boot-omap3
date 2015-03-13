@@ -25,7 +25,7 @@ include $(TOPDIR)/config.mk
 
 LIB	= $(obj)lib$(BOARD).o
 
-COBJS-y	:= $(BOARD).o
+COBJS-y	:= $(BOARD).o gf_eeprom.o gf_eeprom_port.o
 
 COBJS	:= $(sort $(COBJS-y))
 SRCS	:= $(COBJS:.o=.c)

@@ -155,6 +155,7 @@ int i2c_probe(uchar chip);
 int i2c_read(uchar chip, uint addr, int alen, uchar *buffer, int len);
 int i2c_write(uchar chip, uint addr, int alen, uchar *buffer, int len);
 int i2c_read_byte_16bitoffset (u8 devaddr, u16 regoffset, u8 * value);
+int i2c_write_byte_16bitoffset (u8 devaddr, u16 regoffset, u8  value);
 /*
  * Utility routines to read/write registers.
  */

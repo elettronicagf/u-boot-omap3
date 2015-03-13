@@ -42,6 +42,7 @@ extern volatile struct ehci_hcor *hcor;
 #include "omap3egf.h"
 #include "muxing/pinmux_jsf0377_a01.h"
 #include <i2c.h>
+#include "gf_eeprom.h"
 
 #define pr_debug(fmt, args...) debug(fmt, ##args)
 
@@ -50,59 +51,27 @@ extern volatile struct ehci_hcor *hcor;
 /* EEPROM */
 #define EEPROM_I2C_BUS 			1
 
-/* PRODUCT CODE */
-#define REV_STR_TO_REV_CODE(REV_STRING) \
-	(\
-	(((REV_STRING[3]-'0')*1000 + (REV_STRING[4]-'0')*100+(REV_STRING[5]-'0')*10 + (REV_STRING[6]-'0')) << 16)|\
-	((REV_STRING[8]-'A') << 8)|\
-	((REV_STRING[9]-'0')*10 + (REV_STRING[10]-'0'))\
-	)
-
-#define REV_CODE(REV1,REV2,REV3)\
-	((REV1<<16) | ((REV2-'A') << 16) |  REV3)
-
-#define REV_NOT_PROGRAMMED  REV_CODE(((0xFF-'0')*1000 + (0xFF-'0')*100+(0xFF-'0')*10 + 0xff-'0'),'A',0xFF)
-
-#define PRODUCT_VERSION_LEN  12  /* termination character included. ex: JSC0336_A02*/
-
 DECLARE_GLOBAL_DATA_PTR;
-
-static __u32 egf_product_code;
-
-static __u32 get_product_code(void)
-{
-	__u8 product_version[PRODUCT_VERSION_LEN];
-	__u8 somrevbootargs[PRODUCT_VERSION_LEN + 9];//8 is the lenght of " somrev="
-	u32 product_code;
-	int i;
-	i2c_set_bus_num(EEPROM_I2C_BUS);
-	for(i=0; i<PRODUCT_VERSION_LEN-1; i++){
-		if(i2c_read_byte_16bitoffset(0x50, i, &product_version[i])){
-			printf("EEPROM16 read Error\n");
-		}
-	}
-	i2c_set_bus_num(TWL4030_I2C_BUS);
-	product_code = REV_STR_TO_REV_CODE(product_version);
-	if(product_code != REV_NOT_PROGRAMMED){
-		product_version[PRODUCT_VERSION_LEN-1]=0; /* add termination character */
-		printf("Product = %s RevisionCode = %x\n",product_version,product_code);
-		strcpy(somrevbootargs," somrev=");
-		strcat(somrevbootargs,product_version);
-		setenv("somrevbootargs",somrevbootargs);
-	}
-	else {
-		printf("Eeprom not programmed. Selected Default Configuration.\n");
-	}
-	return product_code;
-}
 
 int load_revision(void)
 {
-	egf_product_code = get_product_code();
+	char * egf_sw_id_code;
+	int ret;
+
+	ret = gf_load_som_revision(&egf_sw_id_code,1);
+	if (ret)
+	{
+		printf("System Hang.\n");
+		while(1);
+	}
+	printf("GF Software ID Code: %s\n",egf_sw_id_code);
+
+	i2c_set_bus_num(TWL4030_I2C_BUS);
+
 	return 0;
 }
 
-void init_board_gpios()
+void init_board_gpios(void)
 {
 	/* Leave tvp5150 enable and reset pins in a consistent state */
 	omap_request_gpio(163);
@@ -157,10 +126,12 @@ int misc_init_r(void)
 
 	omap3_spi_init();
 
-	load_revision();
 	printf("Init CPLD...\n");
 	init_cpld_gpio();
-	printf("Init CPLD Muxing\n");
+
+	load_revision();
+
+	printf("Init CPLD Muxing");
 	set_cpld_muxing(CPLD_MUX_EXP_05_OUT | CPLD_MUX_EXP_06_OUT |
 			CPLD_MUX_EXP_08_OUT | CPLD_MCSPI1_CS1_ENABLED);
 

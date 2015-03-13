@@ -102,22 +102,9 @@ int do_bootm_linux(int flag, int argc, char *argv[], bootm_headers_t *images)
 	int	machid = bd->bi_arch_number;
 	void	(*kernel_entry)(int zero, int arch, uint params);
 
-#ifdef CONFIG_ADD_SOM_REV_BOOTPARAM
-	char	*new_boot_args;
-	char	*somrevboot_args;
-	char	*boot_args;
-	boot_args = getenv ("bootargs");
-	somrevboot_args = getenv ("somrevbootargs");
-	new_boot_args = malloc(strlen(boot_args)+strlen(somrevboot_args));
-	strcpy(new_boot_args,boot_args);
-	strcat(new_boot_args,somrevboot_args);
-	printf("cmdline = %s\n",new_boot_args);
-	char *commandline = new_boot_args;
-
-#else
 #ifdef CONFIG_CMDLINE_TAG
 	char *commandline = getenv ("bootargs");
-#endif
+
 
 #endif
 
