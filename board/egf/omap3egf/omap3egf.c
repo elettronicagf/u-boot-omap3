@@ -135,6 +135,8 @@ int misc_init_r(void)
 	set_cpld_muxing(CPLD_MUX_EXP_05_OUT | CPLD_MUX_EXP_06_OUT |
 			CPLD_MUX_EXP_08_OUT | CPLD_MCSPI1_CS1_ENABLED);
 
+	set_cpld_gpio(CPLD_EXP_06, 1);
+
 	/* Power display on */
 	dieid_num_r();
 

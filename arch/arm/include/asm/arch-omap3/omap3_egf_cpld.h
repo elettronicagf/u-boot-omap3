@@ -13,6 +13,8 @@
 #define MMC3_WF_RESET_3V3   	(1<<9)
 #define MMC3_BT_RESET_3V3       (1<<10)
 #define MMC3_ENABLE_3V3         (1<<11)
+#define CPLD_EXP_06       		(1<<12)
+#define CPLD_EXP_07         	(1<<13)
 
 #define CPLD_MUX_EXP_01_OUT			(1<<0)
 #define CPLD_MUX_EXP_02_OUT			(1<<1)
